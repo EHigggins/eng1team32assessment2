@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"io.github.eng12020team24.project1.desktop","c":"DesktopLauncher","l":"DesktopLauncher()","url":"%3Cinit%3E()"},{"p":"io.github.eng12020team24.project1.desktop","c":"DesktopLauncher","l":"main(String[])","url":"main(java.lang.String[])"}]
