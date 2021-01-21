@@ -1,4 +1,4 @@
-# eng12020team24.github.io Assessment 2
+# Team 32 Assessment 2 Website
 [Source](https://github.com/lakhanmankani/eng1-t32-auber-2/)
 
 [Website](http://technologygarage.com/eng12020team24.github.io/)
