@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GameMap</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.mapclasses</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GameMap (io.github.eng12020team24.project1.mapclasses)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameMap</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.mapclasses;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
+<i>4</i>&nbsp;
+<b class="fc"><i>5</i>&nbsp;public abstract class GameMap {</b>
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    public abstract void render(OrthographicCamera camera);
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    public abstract void update(float delta);
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    public abstract void dispose();
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    public abstract int getWidth();
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    public abstract int getHeight();
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public abstract int getLayers();
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * getter to get the pixel width of the game map, this is done by returning the tiledmap multiplied by tile size.
+<i>21</i>&nbsp;     * @return An int containing the width of the map in pixels
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    public int getPixelWidth() {
+<b class="fc"><i>24</i>&nbsp;        return this.getWidth() * TileType.TILE_SIZE;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * getter get the pixel height of the game map, this is done by returnign the tilemap multiplied by the tile size.
+<i>29</i>&nbsp;     * @return An int containing the height of the map in pixels
+<i>30</i>&nbsp;     */
+<i>31</i>&nbsp;    public int getPixelHeight() {
+<b class="fc"><i>32</i>&nbsp;        return this.getHeight() * TileType.TILE_SIZE;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * Returns the tiletype on an x and y coordinate of the game world.
+<i>37</i>&nbsp;     * @param layer layer of the tile or
+<i>38</i>&nbsp;     * @param x x-coordinate of the tile position
+<i>39</i>&nbsp;     * @param y y-coordinate of the tile position
+<i>40</i>&nbsp;     * @return returns the method get tile type by coordinate, which is a conversion of x and y into the grid map columns and rows
+<i>41</i>&nbsp;     * and the method returns the tile type.
+<i>42</i>&nbsp;     */
+<i>43</i>&nbsp;    public TileType getTileTypeByLocation(int layer, float x, float y) {
+<b class="nc"><i>44</i>&nbsp;        return this.getTileTypeByCoordinate(layer, (int) (x / TileType.TILE_SIZE), (int) (y / TileType.TILE_SIZE));</b>
+<i>45</i>&nbsp;    };
+<i>46</i>&nbsp;    // Casting a float to an int is downcasting, i.e. it drops the
+<i>47</i>&nbsp;    // decimal/non-integer section.
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public abstract TileType getTileTypeByCoordinate(int layer, int col, int row);
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * The collision method, if the x and y cordinate of an object and it&#39;s dimensions overlap with any tiles around it&#39;s boundaries,
+<i>53</i>&nbsp;     * math ceilings are used to round up to ensure the entire surrounding of an object is covered.
+<i>54</i>&nbsp;     * The method has a triple nested for loop to iterate through the layer&#39;s, y-axis, x-axis surrounding the parameters.
+<i>55</i>&nbsp;     *
+<i>56</i>&nbsp;     * @param x x-coordinates of an object
+<i>57</i>&nbsp;     * @param y y-coordinates of an object
+<i>58</i>&nbsp;     * @param width width of an object
+<i>59</i>&nbsp;     * @param height height of an object
+<i>60</i>&nbsp;     * @return if the tile is not null (to make sure there is a tile on that layer) and then the tile is collidable then return true, else false.
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    public boolean doesRectCollideWithMap(float x, float y, int width, int height) {
+<b class="pc"><i>63</i>&nbsp;        if (x &lt; 0 || y &lt; 0 || x + width &gt; getPixelWidth() || y + height &gt; getPixelHeight())</b>
+<b class="nc"><i>64</i>&nbsp;            return true;</b>
+<i>65</i>&nbsp;
+<b class="fc"><i>66</i>&nbsp;        for (int row = (int) (y / TileType.TILE_SIZE); row &lt; Math.ceil((y + height) / TileType.TILE_SIZE); row++) {</b>
+<b class="fc"><i>67</i>&nbsp;            for (int col = (int) (x / TileType.TILE_SIZE); col &lt; Math.ceil((x + width) / TileType.TILE_SIZE); col++) {</b>
+<b class="fc"><i>68</i>&nbsp;                for (int layer = 0; layer &lt; getLayers(); layer++) {</b>
+<b class="fc"><i>69</i>&nbsp;                    TileType type = getTileTypeByCoordinate(layer, col, row);</b>
+<b class="pc"><i>70</i>&nbsp;                    if (type != null &amp;&amp; type.isCollidable()) {</b>
+<b class="nc"><i>71</i>&nbsp;                        return true;</b>
+<i>72</i>&nbsp;                    }
+<i>73</i>&nbsp;                }
+<i>74</i>&nbsp;            }
+<i>75</i>&nbsp;        }
+<b class="fc"><i>76</i>&nbsp;        return false;</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;}
+<i>79</i>&nbsp;//MIT License
+<i>80</i>&nbsp;//
+<i>81</i>&nbsp;//Copyright (c) 2018 Nathanael Maher
+<i>82</i>&nbsp;//
+<i>83</i>&nbsp;//Permission is hereby granted, free of charge, to any person obtaining a copy
+<i>84</i>&nbsp;//of this software and associated documentation files (the &quot;Software&quot;), to deal
+<i>85</i>&nbsp;//in the Software without restriction, including without limitation the rights
+<i>86</i>&nbsp;//to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+<i>87</i>&nbsp;//copies of the Software, and to permit persons to whom the Software is
+<i>88</i>&nbsp;//furnished to do so, subject to the following conditions:
+<i>89</i>&nbsp;//
+<i>90</i>&nbsp;//The above copyright notice and this permission notice shall be included in all
+<i>91</i>&nbsp;//copies or substantial portions of the Software.
+<i>92</i>&nbsp;//
+<i>93</i>&nbsp;//THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+<i>94</i>&nbsp;//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+<i>95</i>&nbsp;//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+<i>96</i>&nbsp;//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+<i>97</i>&nbsp;//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+<i>98</i>&nbsp;//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+<i>99</i>&nbsp;//SOFTWARE.
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

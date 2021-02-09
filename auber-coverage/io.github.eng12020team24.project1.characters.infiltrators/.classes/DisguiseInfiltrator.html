@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DisguiseInfiltrator</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.characters.infiltrators</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DisguiseInfiltrator (io.github.eng12020team24.project1.characters.infiltrators)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DisguiseInfiltrator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (4/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.characters.infiltrators;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
+<i>4</i>&nbsp;import com.badlogic.gdx.graphics.g2d.Animation;
+<i>5</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<i>6</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+<i>7</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureRegion;
+<i>8</i>&nbsp;import com.badlogic.gdx.math.Vector2;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import io.github.eng12020team24.project1.characters.Infiltrator;
+<i>11</i>&nbsp;import io.github.eng12020team24.project1.characters.character_utils;
+<i>12</i>&nbsp;import io.github.eng12020team24.project1.pathfinding.Tile;
+<i>13</i>&nbsp;import io.github.eng12020team24.project1.pathfinding.TileGraph;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;public class DisguiseInfiltrator extends Infiltrator {
+<i>16</i>&nbsp;    private TextureRegion disguisedIdle;
+<i>17</i>&nbsp;    private Animation&lt;TextureRegion&gt; disguisedWalking;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public DisguiseInfiltrator(int diffulty, TileGraph tileGraph, int x, int y, TextureAtlas textureAtlas) {
+<b class="fc"><i>20</i>&nbsp;        super(diffulty, tileGraph, x, y, textureAtlas);</b>
+<b class="fc"><i>21</i>&nbsp;        disguisedWalking = new Animation&lt;TextureRegion&gt;(1f / 4f, textureAtlas.findRegions(&quot;Z_INFILTRATOR_DISGUISED&quot;));</b>
+<b class="fc"><i>22</i>&nbsp;        disguisedIdle = new TextureRegion(textureAtlas.findRegion(&quot;Z_INFILTRATOR_DISGUISED&quot;));</b>
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public DisguiseInfiltrator(int difficulty, TileGraph tileGraph, Tile tilePos, TextureAtlas textureAtlas) {
+<b class="fc"><i>27</i>&nbsp;        this(difficulty, tileGraph, (int) tilePos.getCenterPosition().x, (int) tilePos.getCenterPosition().y, textureAtlas);</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Override
+<i>31</i>&nbsp;    public void render(SpriteBatch batch, OrthographicCamera camera) {
+<b class="nc"><i>32</i>&nbsp;        if (!usingAbility) {</b>
+<b class="nc"><i>33</i>&nbsp;            super.render(batch, camera);</b>
+<i>34</i>&nbsp;        } else {
+<b class="nc"><i>35</i>&nbsp;                Vector2 cameraRelativeLocation = character_utils.worldPositionToCameraPosition(camera, new Vector2(xPos, yPos));</b>
+<b class="nc"><i>36</i>&nbsp;                cameraRelativeLocation.sub(new Vector2(16, 16));</b>
+<b class="nc"><i>37</i>&nbsp;                if (movementElapsedTime == 0) {</b>
+<b class="nc"><i>38</i>&nbsp;                    batch.draw(disguisedIdle, cameraRelativeLocation.x, cameraRelativeLocation.y, 16, 16, 32, 32, 1, 1, rotation);</b>
+<i>39</i>&nbsp;                    // Draws the character with the specific rotation.
+<i>40</i>&nbsp;                } else {
+<b class="nc"><i>41</i>&nbsp;                    batch.draw(</b>
+<b class="nc"><i>42</i>&nbsp;                        disguisedWalking.getKeyFrame(</b>
+<i>43</i>&nbsp;                            movementElapsedTime, true), 
+<i>44</i>&nbsp;                    cameraRelativeLocation.x, 
+<i>45</i>&nbsp;                    cameraRelativeLocation.y, 16, 16, 32, 32,
+<i>46</i>&nbsp;                            1, 1, rotation);
+<i>47</i>&nbsp;                }
+<i>48</i>&nbsp;        }
+<i>49</i>&nbsp;        // Reimplemented render method as the super method assumes that the normal idle and disguised animations are used
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

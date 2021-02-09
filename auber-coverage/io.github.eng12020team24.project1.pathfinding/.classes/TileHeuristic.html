@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TileHeuristic</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.pathfinding</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TileHeuristic (io.github.eng12020team24.project1.pathfinding)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TileHeuristic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.pathfinding;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.ai.pfa.Heuristic;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;// This code is based on code here https://happycoding.io/tutorials/libgdx/pathfinding, which is released under the terms of the CC BY 4.0 license, available at https://creativecommons.org/licenses/by/4.0/.
+<b class="fc"><i>6</i>&nbsp;public class TileHeuristic implements Heuristic&lt;Tile&gt; {</b>
+<b class="fc"><i>7</i>&nbsp;    private static double SQRT_TWO_MINUS_ONE = Math.sqrt(2) - 1;</b>
+<i>8</i>&nbsp;    // This is precomputed so it is only ever calculated once to save on compute
+<i>9</i>&nbsp;    // time.
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    /**
+<i>12</i>&nbsp;     * Returns the octile distance between two tiles
+<i>13</i>&nbsp;     * 
+<i>14</i>&nbsp;     * @param currentTile One of the tiles to find the distance between
+<i>15</i>&nbsp;     * @param goalTile    One of the tiles to find the distance between
+<i>16</i>&nbsp;     * @return The octile distance between the two input tiles
+<i>17</i>&nbsp;     */
+<i>18</i>&nbsp;    @Override
+<i>19</i>&nbsp;    public float estimate(Tile currentTile, Tile goalTile) {
+<i>20</i>&nbsp;        // We use the octile heuristic as we can move orthogonally (up-down-left-right)
+<i>21</i>&nbsp;        // as well as diagonally.
+<b class="fc"><i>22</i>&nbsp;        int xDiff = Math.abs(currentTile.getXPos() - goalTile.getXPos());</b>
+<b class="fc"><i>23</i>&nbsp;        int yDiff = Math.abs(currentTile.getYPos() - goalTile.getYPos());</b>
+<b class="fc"><i>24</i>&nbsp;        return (float) (Math.max(xDiff, yDiff) + (SQRT_TWO_MINUS_ONE) * Math.min(xDiff, yDiff));</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

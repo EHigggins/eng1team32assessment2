@@ -1,0 +1,167 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Button</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.gamestates</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Button (io.github.eng12020team24.project1.gamestates)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Button</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35.3%
+  </span>
+  <span class="absValue">
+    (6/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.gamestates;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.Gdx;
+<i>4</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<i>5</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureRegion;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class Button {
+<i>8</i>&nbsp;    private Integer x;
+<i>9</i>&nbsp;    private Integer y;
+<i>10</i>&nbsp;    private Integer width;
+<i>11</i>&nbsp;    private Integer height;
+<i>12</i>&nbsp;    private TextureRegion image;
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;    public Button(Integer x, Integer y, TextureRegion image) {</b>
+<b class="fc"><i>15</i>&nbsp;        this.x = x;</b>
+<b class="fc"><i>16</i>&nbsp;        this.y = y;</b>
+<b class="fc"><i>17</i>&nbsp;        this.width = image.getRegionWidth();</b>
+<b class="fc"><i>18</i>&nbsp;        this.height = image.getRegionHeight();</b>
+<b class="fc"><i>19</i>&nbsp;        this.image = image;</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * Returns if this button has been clicked on by finding if a click has occured
+<i>24</i>&nbsp;     * whilst the mouse is over this button
+<i>25</i>&nbsp;     * 
+<i>26</i>&nbsp;     * @return if this button has been clicked
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    public boolean isClicked() {
+<b class="nc"><i>29</i>&nbsp;        return Gdx.input.isTouched() &amp;&amp; isMouseOver();</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Returns if the mouse is currently positioned over this button
+<i>34</i>&nbsp;     * 
+<i>35</i>&nbsp;     * @return if mouse currently positioned over this button
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public boolean isMouseOver() {
+<b class="nc"><i>38</i>&nbsp;        if (Gdx.graphics.getHeight() - Gdx.input.getY() - 1 &lt; y + height // checks that mouse y below max y of button</b>
+<b class="nc"><i>39</i>&nbsp;                &amp;&amp; Gdx.graphics.getHeight() - Gdx.input.getY() - 1 &gt; y // checks that mouse y above min y of button</b>
+<b class="nc"><i>40</i>&nbsp;                &amp;&amp; Gdx.input.getX() &gt; x // checks that mouse x above min x of button</b>
+<b class="nc"><i>41</i>&nbsp;                &amp;&amp; Gdx.input.getX() &lt; width + x) { // checks that mouse x below below max x of button</b>
+<b class="nc"><i>42</i>&nbsp;            return true;</b>
+<i>43</i>&nbsp;        } else {
+<b class="nc"><i>44</i>&nbsp;            return false;</b>
+<i>45</i>&nbsp;        }
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Gets texture region of this button
+<i>50</i>&nbsp;     * 
+<i>51</i>&nbsp;     * @return image - the texture region of this button
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    public TextureRegion getTextureRegion() {
+<b class="nc"><i>54</i>&nbsp;        return image;</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * Gets x postion of the bottom left corner of this button
+<i>59</i>&nbsp;     * 
+<i>60</i>&nbsp;     * @return x postion of the bottom left corner of this button
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    public int getX() {
+<b class="nc"><i>63</i>&nbsp;        return x;</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * Gets y postion of the bottom left corner of this button
+<i>68</i>&nbsp;     * 
+<i>69</i>&nbsp;     * @return y postion of the bottom left corner of this button
+<i>70</i>&nbsp;     */
+<i>71</i>&nbsp;    public int getY() {
+<b class="nc"><i>72</i>&nbsp;        return y;</b>
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * Draws the Button at its coordinates with the specified SpriteBatch
+<i>77</i>&nbsp;     * 
+<i>78</i>&nbsp;     * @param batch The SpriteBatch used to draw the button.
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    public void draw(SpriteBatch batch) {
+<b class="nc"><i>81</i>&nbsp;        batch.draw(image, x, y);</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

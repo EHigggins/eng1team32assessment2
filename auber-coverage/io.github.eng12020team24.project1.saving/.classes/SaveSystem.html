@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SaveSystem</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.saving</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SaveSystem (io.github.eng12020team24.project1.saving)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SaveSystem</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 76)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.saving;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.utils.Json;
+<i>4</i>&nbsp;import io.github.eng12020team24.project1.characters.Auber;
+<i>5</i>&nbsp;import io.github.eng12020team24.project1.characters.Infiltrator;
+<i>6</i>&nbsp;import io.github.eng12020team24.project1.characters.NeutralNPC;
+<i>7</i>&nbsp;import io.github.eng12020team24.project1.powerup.PowerUp;
+<i>8</i>&nbsp;import io.github.eng12020team24.project1.system.StationSystem;
+<i>9</i>&nbsp;import org.json.JSONArray;
+<i>10</i>&nbsp;import org.json.JSONObject;
+<i>11</i>&nbsp;import java.io.FileWriter;
+<i>12</i>&nbsp;import java.io.IOException;
+<i>13</i>&nbsp;import java.util.ArrayList;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;public class SaveSystem {
+<i>16</i>&nbsp;    private Json json;
+<i>17</i>&nbsp;    private ArrayList&lt;Infiltrator&gt; infiltrators;
+<i>18</i>&nbsp;    private ArrayList&lt;Infiltrator&gt; infiltratorsToAdd;
+<i>19</i>&nbsp;    private ArrayList&lt;NeutralNPC&gt; npcs;
+<i>20</i>&nbsp;    private ArrayList&lt;StationSystem&gt; systems;
+<i>21</i>&nbsp;    private int difficulty;
+<i>22</i>&nbsp;    private Auber auber;
+<i>23</i>&nbsp;    private FileWriter file;
+<i>24</i>&nbsp;    private ArrayList&lt;PowerUp&gt; unusedPowerups;
+<i>25</i>&nbsp;    private ArrayList&lt;PowerUp&gt; currentPowerups;
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;    public SaveSystem(ArrayList&lt;Infiltrator&gt; infiltrators, ArrayList&lt;NeutralNPC&gt; npcs, ArrayList&lt;StationSystem&gt; systems, int difficulty, Auber auber, ArrayList&lt;Infiltrator&gt; infiltratorsToAdd, ArrayList currentPowerups, ArrayList unusedPowerups) throws IOException {</b>
+<b class="nc"><i>28</i>&nbsp;        this.infiltrators = infiltrators;</b>
+<b class="nc"><i>29</i>&nbsp;        this.npcs = npcs;</b>
+<b class="nc"><i>30</i>&nbsp;        this.systems = systems;</b>
+<b class="nc"><i>31</i>&nbsp;        this.difficulty = difficulty;</b>
+<b class="nc"><i>32</i>&nbsp;        this.auber = auber;</b>
+<b class="nc"><i>33</i>&nbsp;        this.infiltratorsToAdd = infiltratorsToAdd;</b>
+<b class="nc"><i>34</i>&nbsp;        this.unusedPowerups = unusedPowerups;</b>
+<b class="nc"><i>35</i>&nbsp;        this.currentPowerups = currentPowerups;</b>
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;        json = new Json();</b>
+<b class="nc"><i>38</i>&nbsp;        file = new FileWriter(&quot;save.txt&quot;);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * Writes a JSONObject to the file save.txt
+<i>43</i>&nbsp;     * @throws IOException if failed to save object
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    public void writeSaveToFile() throws IOException {
+<b class="nc"><i>46</i>&nbsp;        JSONObject save = new JSONObject();</b>
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;        save.put(&quot;Infiltrators&quot;, generateInfiltratorSave());</b>
+<b class="nc"><i>49</i>&nbsp;        save.put(&quot;NPCS&quot;, extractNpcInfo(npcs));</b>
+<b class="nc"><i>50</i>&nbsp;        save.put(&quot;Systems&quot;, extractSystemsInfo(systems));</b>
+<b class="nc"><i>51</i>&nbsp;        save.put(&quot;Difficulty&quot;, difficulty);</b>
+<b class="nc"><i>52</i>&nbsp;        save.put(&quot;Auber&quot;, extractAuberInfo(auber));</b>
+<b class="nc"><i>53</i>&nbsp;        save.put(&quot;Powerups&quot;, generatePowerupsSave());</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;        try{
+<b class="nc"><i>56</i>&nbsp;            file.write(save.toString());</b>
+<b class="nc"><i>57</i>&nbsp;            System.out.println(&quot;Successfully saved JSON Object to File&quot;);</b>
+<b class="nc"><i>58</i>&nbsp;            System.out.println(&quot;\nJson Object: &quot; + save.toString());</b>
+<b class="nc"><i>59</i>&nbsp;        }catch (IOException e)</b>
+<i>60</i>&nbsp;        {
+<b class="nc"><i>61</i>&nbsp;            e.printStackTrace();</b>
+<i>62</i>&nbsp;        }finally {
+<b class="nc"><i>63</i>&nbsp;            file.flush();</b>
+<b class="nc"><i>64</i>&nbsp;            file.close();</b>
+<b class="nc"><i>65</i>&nbsp;        }</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    /**
+<i>69</i>&nbsp;     * Merges the 2 different lists of infiltrators into 1 JSONObject
+<i>70</i>&nbsp;     * @return JSONObject containing the two lists
+<i>71</i>&nbsp;     */
+<i>72</i>&nbsp;    private JSONObject generateInfiltratorSave() {
+<b class="nc"><i>73</i>&nbsp;        JSONObject infiltratorObject = new JSONObject();</b>
+<i>74</i>&nbsp;
+<b class="nc"><i>75</i>&nbsp;        infiltratorObject.put(&quot;alreadyAdded&quot;, extractInfiltratorInfo(infiltrators));</b>
+<b class="nc"><i>76</i>&nbsp;        infiltratorObject.put(&quot;toAdd&quot;, extractInfiltratorInfo(infiltratorsToAdd));</b>
+<i>77</i>&nbsp;
+<b class="nc"><i>78</i>&nbsp;        return infiltratorObject;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    /**
+<i>82</i>&nbsp;     * Merges the 2 different lists of PowerUps into 1 JSONObject
+<i>83</i>&nbsp;     * @return JSONObject containing PowerUp information
+<i>84</i>&nbsp;     */
+<i>85</i>&nbsp;    private JSONObject generatePowerupsSave() {
+<b class="nc"><i>86</i>&nbsp;        JSONObject object = new JSONObject();</b>
+<i>87</i>&nbsp;
+<b class="nc"><i>88</i>&nbsp;        object.put(&quot;unused&quot;, extractPowerupsInfo(unusedPowerups));</b>
+<b class="nc"><i>89</i>&nbsp;        object.put(&quot;current&quot;, extractPowerupsInfo(currentPowerups));</b>
+<i>90</i>&nbsp;
+<b class="nc"><i>91</i>&nbsp;        return object;</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    /**
+<i>95</i>&nbsp;     * Converts a list of infiltrators into a JSONArray
+<i>96</i>&nbsp;     * @param  infiltrators ArrayList of infiltrators to parse
+<i>97</i>&nbsp;     * @return JSONArray containing infiltrator info
+<i>98</i>&nbsp;     */
+<i>99</i>&nbsp;    private JSONArray extractInfiltratorInfo(ArrayList&lt;Infiltrator&gt; infiltrators) {
+<b class="nc"><i>100</i>&nbsp;        JSONArray infiltratorInfo = new JSONArray();</b>
+<i>101</i>&nbsp;
+<b class="nc"><i>102</i>&nbsp;        for (Infiltrator infiltrator: infiltrators) {</b>
+<b class="nc"><i>103</i>&nbsp;            JSONObject object = new JSONObject();</b>
+<i>104</i>&nbsp;
+<b class="nc"><i>105</i>&nbsp;            object.put(&quot;x&quot;, infiltrator.getXPos());</b>
+<b class="nc"><i>106</i>&nbsp;            object.put(&quot;y&quot;, infiltrator.getYPos());</b>
+<b class="nc"><i>107</i>&nbsp;            object.put(&quot;name&quot;, infiltrator.getClass().getSimpleName());</b>
+<i>108</i>&nbsp;
+<b class="nc"><i>109</i>&nbsp;            infiltratorInfo.put(object);</b>
+<b class="nc"><i>110</i>&nbsp;        }</b>
+<i>111</i>&nbsp;
+<b class="nc"><i>112</i>&nbsp;        return infiltratorInfo;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    /**
+<i>116</i>&nbsp;     * Converts a list of NPCs to an JSONArray
+<i>117</i>&nbsp;     * @param npcs ArrayList of NPCs to parse
+<i>118</i>&nbsp;     * @return JSONArray of NPCs info
+<i>119</i>&nbsp;     */
+<i>120</i>&nbsp;    private JSONArray extractNpcInfo(ArrayList&lt;NeutralNPC&gt; npcs) {
+<b class="nc"><i>121</i>&nbsp;        JSONArray npcInfo = new JSONArray();</b>
+<i>122</i>&nbsp;
+<b class="nc"><i>123</i>&nbsp;        for (NeutralNPC npc: npcs) {</b>
+<b class="nc"><i>124</i>&nbsp;            JSONObject object = new JSONObject();</b>
+<i>125</i>&nbsp;
+<b class="nc"><i>126</i>&nbsp;            object.put(&quot;x&quot;, npc.getXPos());</b>
+<b class="nc"><i>127</i>&nbsp;            object.put(&quot;y&quot;, npc.getYPos());</b>
+<i>128</i>&nbsp;
+<b class="nc"><i>129</i>&nbsp;            npcInfo.put(object);</b>
+<b class="nc"><i>130</i>&nbsp;        }</b>
+<i>131</i>&nbsp;
+<b class="nc"><i>132</i>&nbsp;        return npcInfo;</b>
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    /**
+<i>136</i>&nbsp;     * Converts a list of StaionSystems into a JSONArray
+<i>137</i>&nbsp;     * @param systems List of systems to parse
+<i>138</i>&nbsp;     * @return JSONArray of systems information
+<i>139</i>&nbsp;     */
+<i>140</i>&nbsp;    private JSONArray extractSystemsInfo(ArrayList&lt;StationSystem&gt; systems) {
+<b class="nc"><i>141</i>&nbsp;        JSONArray systemsInfo = new JSONArray();</b>
+<i>142</i>&nbsp;
+<b class="nc"><i>143</i>&nbsp;        for(StationSystem system: systems) {</b>
+<b class="nc"><i>144</i>&nbsp;            JSONObject object = new JSONObject();</b>
+<i>145</i>&nbsp;
+<b class="nc"><i>146</i>&nbsp;            object.put(&quot;x&quot;, system.getX());</b>
+<b class="nc"><i>147</i>&nbsp;            object.put(&quot;y&quot;, system.getY());</b>
+<b class="nc"><i>148</i>&nbsp;            object.put(&quot;status&quot;, system.getStatus());</b>
+<b class="nc"><i>149</i>&nbsp;            object.put(&quot;health&quot;, system.getHealth());</b>
+<i>150</i>&nbsp;
+<b class="nc"><i>151</i>&nbsp;            systemsInfo.put(object);</b>
+<b class="nc"><i>152</i>&nbsp;        }</b>
+<i>153</i>&nbsp;
+<b class="nc"><i>154</i>&nbsp;        return systemsInfo;</b>
+<i>155</i>&nbsp;    }
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;    /**
+<i>158</i>&nbsp;     * Creates a JSONObject containing info of Auber
+<i>159</i>&nbsp;     * @param auber Current Auber being used
+<i>160</i>&nbsp;     * @return JSONObject containing Auber data
+<i>161</i>&nbsp;     */
+<i>162</i>&nbsp;    private JSONObject extractAuberInfo(Auber auber) {
+<b class="nc"><i>163</i>&nbsp;        JSONObject auberObject = new JSONObject();</b>
+<i>164</i>&nbsp;
+<b class="nc"><i>165</i>&nbsp;        auberObject.put(&quot;x&quot;, auber.getXPos());</b>
+<b class="nc"><i>166</i>&nbsp;        auberObject.put(&quot;y&quot;, auber.getYPos());</b>
+<b class="nc"><i>167</i>&nbsp;        auberObject.put(&quot;health&quot;, auber.getHealth());</b>
+<i>168</i>&nbsp;
+<b class="nc"><i>169</i>&nbsp;        return auberObject;</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    /**
+<i>173</i>&nbsp;     * Converts a list of PowerUps into a JSONArray
+<i>174</i>&nbsp;     * @param powerups ArrayList of PowerUps to convert
+<i>175</i>&nbsp;     * @return JSONArray containing PowerUp data
+<i>176</i>&nbsp;     */
+<i>177</i>&nbsp;    private JSONArray extractPowerupsInfo(ArrayList&lt;PowerUp&gt; powerups) {
+<b class="nc"><i>178</i>&nbsp;        JSONArray powerupsInfo = new JSONArray();</b>
+<i>179</i>&nbsp;
+<b class="nc"><i>180</i>&nbsp;        for(PowerUp powerup : powerups)</b>
+<i>181</i>&nbsp;        {
+<b class="nc"><i>182</i>&nbsp;            JSONObject object = new JSONObject();</b>
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;            object.put(&quot;name&quot;, powerup.name);</b>
+<b class="nc"><i>185</i>&nbsp;            object.put(&quot;xPos&quot;, powerup.getxPos());</b>
+<b class="nc"><i>186</i>&nbsp;            object.put(&quot;yPos&quot;, powerup.getyPos());</b>
+<b class="nc"><i>187</i>&nbsp;            object.put(&quot;timer&quot;, powerup.getTimer());</b>
+<i>188</i>&nbsp;
+<b class="nc"><i>189</i>&nbsp;            powerupsInfo.put(object);</b>
+<b class="nc"><i>190</i>&nbsp;        }</b>
+<i>191</i>&nbsp;
+<b class="nc"><i>192</i>&nbsp;        return powerupsInfo;</b>
+<i>193</i>&nbsp;    }
+<i>194</i>&nbsp;
+<i>195</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

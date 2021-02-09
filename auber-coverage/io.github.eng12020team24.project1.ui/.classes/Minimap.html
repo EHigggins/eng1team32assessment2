@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Minimap</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.ui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Minimap (io.github.eng12020team24.project1.ui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Minimap</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (15/ 30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.ui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.Gdx;
+<i>4</i>&nbsp;import com.badlogic.gdx.Input;
+<i>5</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<i>6</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+<i>7</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureRegion;
+<i>8</i>&nbsp;import io.github.eng12020team24.project1.characters.Auber;
+<i>9</i>&nbsp;import io.github.eng12020team24.project1.mapclasses.TileType;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;public class Minimap {
+<i>12</i>&nbsp;    /** Constant: Mapsize as 256, image sprite is 256x256px **/
+<i>13</i>&nbsp;    public static final int MINIMAP_SIZE = 256;
+<b class="fc"><i>14</i>&nbsp;    private final int[][] tpLocations = { { 28, 6 }, { 26, 47 }, { 17, 32 }, { 35, 30 }, { 30, 15 }, { 38, 11 } };</b>
+<i>15</i>&nbsp;    public TextureRegion minimapTextureOn;
+<i>16</i>&nbsp;    private int xRenderPos;
+<i>17</i>&nbsp;    private int yRenderPos;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * Initialise Minimap Class, passing Texture Atlas for UI. With default minimap
+<i>21</i>&nbsp;     * being the center of the screen. Atlas is used to retrieve the minimap image
+<i>22</i>&nbsp;     * from uispritesheet.
+<i>23</i>&nbsp;     */
+<b class="fc"><i>24</i>&nbsp;    public Minimap() {</b>
+<b class="fc"><i>25</i>&nbsp;        xRenderPos = (Gdx.graphics.getWidth() - MINIMAP_SIZE) / 2;</b>
+<b class="fc"><i>26</i>&nbsp;        yRenderPos = (Gdx.graphics.getHeight() - MINIMAP_SIZE) / 2;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    /**
+<i>30</i>&nbsp;     * The render method, only called when player is on a teleporter pad. This draws
+<i>31</i>&nbsp;     * a minimap against the relative position of the player. the number 6.25 is the
+<i>32</i>&nbsp;     * calculation of 50(The no. tiles on the map)*32(Tile size)/256(Minimap size)
+<i>33</i>&nbsp;     * this makes the minimap position show where the player currently is on the
+<i>34</i>&nbsp;     * map.
+<i>35</i>&nbsp;     * 
+<i>36</i>&nbsp;     * @param batch   batch class object to allow screen rendering
+<i>37</i>&nbsp;     * @param playerx retrieve auber&#39;s x co-ordinate
+<i>38</i>&nbsp;     * @param playery retrieve auber&#39;s y co-ordinate
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    public void render(SpriteBatch batch, float playerx, float playery) {
+<b class="nc"><i>41</i>&nbsp;        xRenderPos = (Gdx.graphics.getWidth() / 2) - (int) ((playerx) / 6.25);</b>
+<b class="nc"><i>42</i>&nbsp;        yRenderPos = (Gdx.graphics.getHeight() / 2) - (int) ((playery) / 6.25);</b>
+<b class="nc"><i>43</i>&nbsp;        batch.draw(minimapTextureOn, xRenderPos, yRenderPos);</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /**
+<i>47</i>&nbsp;     * Checks if Auber is standing on any teleporter
+<i>48</i>&nbsp;     * @param auber Auber character
+<i>49</i>&nbsp;     * @return true if Auber is on a teleporter, false otherwise
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    public boolean isAuberOnTeleporter(Auber auber) {
+<b class="fc"><i>52</i>&nbsp;        for (int[] location : tpLocations) {</b>
+<b class="fc"><i>53</i>&nbsp;            int auberXPos = auber.getXPos();</b>
+<b class="fc"><i>54</i>&nbsp;            int auberYPos = auber.getYPos();</b>
+<i>55</i>&nbsp;
+<b class="fc"><i>56</i>&nbsp;            int teleporterXPos = location[0] * TileType.TILE_SIZE;</b>
+<b class="fc"><i>57</i>&nbsp;            int teleporterYPos = location[1] * TileType.TILE_SIZE;</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;            // Check if auber is in bounds
+<b class="fc"><i>60</i>&nbsp;            if (auberXPos &lt;= teleporterXPos &amp;&amp;</b>
+<i>61</i>&nbsp;                auberXPos + TileType.TILE_SIZE &gt;= teleporterXPos &amp;&amp;
+<i>62</i>&nbsp;                auberYPos &lt;= teleporterYPos &amp;&amp;
+<i>63</i>&nbsp;                auberYPos + TileType.TILE_SIZE &gt;= teleporterYPos) {
+<b class="fc"><i>64</i>&nbsp;                return true;</b>
+<i>65</i>&nbsp;            }
+<i>66</i>&nbsp;        }
+<b class="fc"><i>67</i>&nbsp;        return false;</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * The teleport method calls gets the auber object and calls auber&#39;s move method
+<i>72</i>&nbsp;     * to &quot;teleport&quot; auber to a seperate location of the map. It calls using the 2D
+<i>73</i>&nbsp;     * array of teleporter locations, co-ordinates retrieved from tiled on where
+<i>74</i>&nbsp;     * they are in the tile grid of 50x50. This is then multiplied by the tilesize
+<i>75</i>&nbsp;     * and offset to match Auber&#39;s render offset.
+<i>76</i>&nbsp;     * 
+<i>77</i>&nbsp;     * @param auber retrieve auber object to get access to move auber&#39;s position.
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    public void teleportTo(Auber auber) {
+<b class="nc"><i>80</i>&nbsp;        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {</b>
+<b class="nc"><i>81</i>&nbsp;            teleport(auber, 0);</b>
+<b class="nc"><i>82</i>&nbsp;        } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {</b>
+<b class="nc"><i>83</i>&nbsp;            teleport(auber, 1);</b>
+<b class="nc"><i>84</i>&nbsp;        } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {</b>
+<b class="nc"><i>85</i>&nbsp;            teleport(auber, 2);</b>
+<b class="nc"><i>86</i>&nbsp;        } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {</b>
+<b class="nc"><i>87</i>&nbsp;            teleport(auber, 3);</b>
+<b class="nc"><i>88</i>&nbsp;        } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {</b>
+<b class="nc"><i>89</i>&nbsp;            teleport(auber, 4);</b>
+<b class="nc"><i>90</i>&nbsp;        } else if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_6)) {</b>
+<b class="nc"><i>91</i>&nbsp;            teleport(auber, 5);</b>
+<i>92</i>&nbsp;        }
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    /**
+<i>96</i>&nbsp;     * Teleport auber to numbered teleporter 0 - 5.
+<i>97</i>&nbsp;     * Note: Teleporter index is off by one from the assigned activation key.
+<i>98</i>&nbsp;     * @param auber Auber character
+<i>99</i>&nbsp;     * @param teleporter teleporter index to which Auber is teleported to
+<i>100</i>&nbsp;     */
+<i>101</i>&nbsp;    public void teleport(Auber auber, int teleporter) {
+<b class="fc"><i>102</i>&nbsp;        int newXPos = (tpLocations[teleporter][0] * TileType.TILE_SIZE) - 16;</b>
+<b class="fc"><i>103</i>&nbsp;        int newYPos = (tpLocations[teleporter][1] * TileType.TILE_SIZE) - 16;</b>
+<b class="fc"><i>104</i>&nbsp;        auber.move(newXPos, newYPos);</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

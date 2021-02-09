@@ -1,0 +1,112 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InvisibleInfiltrator</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.characters.infiltrators</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InvisibleInfiltrator (io.github.eng12020team24.project1.characters.infiltrators)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InvisibleInfiltrator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/ 4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.characters.infiltrators;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
+<i>4</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<i>5</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import io.github.eng12020team24.project1.characters.Infiltrator;
+<i>8</i>&nbsp;import io.github.eng12020team24.project1.pathfinding.Tile;
+<i>9</i>&nbsp;import io.github.eng12020team24.project1.pathfinding.TileGraph;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;public class InvisibleInfiltrator extends Infiltrator {
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    public InvisibleInfiltrator(int difficulty, TileGraph tileGraph, int x, int y, TextureAtlas textureAtlas) {
+<b class="nc"><i>14</i>&nbsp;        super(difficulty, tileGraph, x, y, textureAtlas);</b>
+<i>15</i>&nbsp;    }
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public InvisibleInfiltrator(int difficulty, TileGraph tileGraph, Tile tilePos, TextureAtlas textureAtlas) {
+<b class="fc"><i>18</i>&nbsp;        super(difficulty, tileGraph, tilePos, textureAtlas);</b>
+<i>19</i>&nbsp;    }
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    @Override
+<i>22</i>&nbsp;    public void render(SpriteBatch batch, OrthographicCamera camera) {
+<b class="nc"><i>23</i>&nbsp;        if (!usingAbility) {</b>
+<b class="nc"><i>24</i>&nbsp;            super.render(batch, camera);</b>
+<i>25</i>&nbsp;        } else {
+<i>26</i>&nbsp;            // Empty as invisible Infiltrators aren&#39;t rendered
+<i>27</i>&nbsp;        }
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

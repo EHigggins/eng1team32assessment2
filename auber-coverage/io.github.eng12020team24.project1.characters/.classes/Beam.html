@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Beam</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.characters</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Beam (io.github.eng12020team24.project1.characters)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Beam</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (15/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.characters;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.Gdx;
+<i>4</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
+<i>5</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<i>6</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+<i>7</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureRegion;
+<i>8</i>&nbsp;import com.badlogic.gdx.math.Vector2;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class Beam {
+<i>11</i>&nbsp;    private static TextureRegion texture;
+<i>12</i>&nbsp;    private float xDir;
+<i>13</i>&nbsp;    private float yDir;
+<i>14</i>&nbsp;    private int xPos;
+<i>15</i>&nbsp;    private int yPos;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    /**
+<i>18</i>&nbsp;     * The initialisation method for Beam. Creates a Beam object on auber&#39;s position and move&#39;s in
+<i>19</i>&nbsp;     * auber&#39;s direction of which it&#39;s facing.
+<i>20</i>&nbsp;     * @param auber insert auber to retrieve attributes from auber.
+<i>21</i>&nbsp;     * @param difficulty The difficulty of the game, sets the shooting speed
+<i>22</i>&nbsp;     * @param atlas insert atlas to get texture regions for the beam.
+<i>23</i>&nbsp;     * @param offset Offset beams to shoot multiple. 0 for no offset, positive value for right, negative for left
+<i>24</i>&nbsp;     */
+<b class="fc"><i>25</i>&nbsp;    public Beam(Auber auber, int difficulty, TextureAtlas atlas, int offset) {</b>
+<b class="fc"><i>26</i>&nbsp;        float rotation = auber.getRotation();</b>
+<b class="fc"><i>27</i>&nbsp;        double xAngle = Math.cos(Math.toRadians(rotation - 90));</b>
+<b class="fc"><i>28</i>&nbsp;        double yAngle = Math.sin(Math.toRadians(rotation - 90));</b>
+<i>29</i>&nbsp;
+<b class="fc"><i>30</i>&nbsp;        xPos = auber.getXPos() - 16 + 32 * offset * (int) yAngle;</b>
+<b class="fc"><i>31</i>&nbsp;        yPos = auber.getYPos() - 16 + 32 * offset * (int) xAngle;</b>
+<i>32</i>&nbsp;
+<b class="fc"><i>33</i>&nbsp;        xDir = (float) (character_utils.beamSpeed(difficulty) * 32 * xAngle);</b>
+<b class="fc"><i>34</i>&nbsp;        yDir = (float) (character_utils.beamSpeed(difficulty) * 32 * yAngle);</b>
+<b class="fc"><i>35</i>&nbsp;        texture = new TextureRegion(atlas.findRegion(&quot;Z_BEAM_ORB&quot;));</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * Method to update the beam to move.
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    public void move() {
+<b class="fc"><i>42</i>&nbsp;        xPos += Math.round(xDir * Gdx.graphics.getDeltaTime());</b>
+<b class="fc"><i>43</i>&nbsp;        yPos += Math.round(yDir * Gdx.graphics.getDeltaTime());</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /**
+<i>47</i>&nbsp;     * method to draw the beam.
+<i>48</i>&nbsp;     * @param batch insert game&#39;s batch to render on screen.
+<i>49</i>&nbsp;     * @param camera insert camera to draw within relative location of the camera.
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    public void render(SpriteBatch batch, OrthographicCamera camera) {
+<b class="nc"><i>52</i>&nbsp;        Vector2 cameraRelativePosition = character_utils.worldPositionToCameraPosition(camera, xPos, yPos);</b>
+<b class="nc"><i>53</i>&nbsp;        batch.draw(texture, cameraRelativePosition.x, cameraRelativePosition.y);</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * getter for the x-coordinate of beam.
+<i>58</i>&nbsp;     * @return returns the integer value of the x position.
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    public int getX() {
+<b class="fc"><i>61</i>&nbsp;        return xPos;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * getter for the y-coordinate of beam.
+<i>66</i>&nbsp;     * @return returns the integer value of the y position
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    public int getY() {
+<b class="fc"><i>69</i>&nbsp;        return yPos;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * Set X
+<i>74</i>&nbsp;     * @param x
+<i>75</i>&nbsp;     */
+<i>76</i>&nbsp;    public final void setX(int x) {
+<b class="fc"><i>77</i>&nbsp;        this.xPos = x;</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    /**
+<i>81</i>&nbsp;     * Set X
+<i>82</i>&nbsp;     * @param x
+<i>83</i>&nbsp;     */
+<i>84</i>&nbsp;    public final void setY(int y) {
+<b class="fc"><i>85</i>&nbsp;        this.yPos = y;</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NeutralNPC</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.characters</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NeutralNPC (io.github.eng12020team24.project1.characters)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NeutralNPC</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.9%
+  </span>
+  <span class="absValue">
+    (9/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.characters;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import io.github.eng12020team24.project1.pathfinding.Tile;
+<i>4</i>&nbsp;import io.github.eng12020team24.project1.pathfinding.TileGraph;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.Random;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import com.badlogic.gdx.Gdx;
+<i>9</i>&nbsp;import com.badlogic.gdx.graphics.g2d.Animation;
+<i>10</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+<i>11</i>&nbsp;import com.badlogic.gdx.graphics.g2d.TextureRegion;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class NeutralNPC extends NPCCharacter {
+<i>14</i>&nbsp;    private float currentWaitTime; // The current time to wait for before moving again
+<i>15</i>&nbsp;    private float elapsedWaitTime;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public NeutralNPC(TileGraph tileGraph, int x, int y, TextureAtlas textureAtlas) {
+<b class="fc"><i>18</i>&nbsp;        super(tileGraph, x, y);</b>
+<b class="fc"><i>19</i>&nbsp;        walkingAnimation = new Animation&lt;TextureRegion&gt;(1f / 4f, textureAtlas.findRegions(&quot;Z_NPC_WALK&quot;));</b>
+<b class="fc"><i>20</i>&nbsp;        idleTexture = new TextureRegion(textureAtlas.findRegion(&quot;Z_NPC_WALK&quot;));</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public NeutralNPC(TileGraph tileGraph, int x, int y, TextureAtlas textureAtlas, String textureName) {
+<b class="nc"><i>24</i>&nbsp;        super(tileGraph, x, y);</b>
+<b class="nc"><i>25</i>&nbsp;        walkingAnimation = new Animation&lt;TextureRegion&gt;(1f / 4f, textureAtlas.findRegions(textureName));</b>
+<b class="nc"><i>26</i>&nbsp;        idleTexture = new TextureRegion(textureAtlas.findRegion(textureName));</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public NeutralNPC(TileGraph tileGraph, Tile tilePos, TextureAtlas textureAtlas) {
+<b class="fc"><i>30</i>&nbsp;        this(tileGraph, (int) tilePos.getCenterPosition().x, (int) tilePos.getCenterPosition().y, textureAtlas);</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public void move() {
+<b class="pc"><i>34</i>&nbsp;        if (this.currentPath != null) {</b>
+<b class="nc"><i>35</i>&nbsp;            currentWaitTime = 0;</b>
+<b class="nc"><i>36</i>&nbsp;            elapsedWaitTime = 0;</b>
+<b class="nc"><i>37</i>&nbsp;            this.followPath(character_utils.NEUTRAL_SPEED);</b>
+<i>38</i>&nbsp;        } else {
+<b class="fc"><i>39</i>&nbsp;            this.movementElapsedTime = 0;</b>
+<b class="pc"><i>40</i>&nbsp;            if (elapsedWaitTime == 0) {</b>
+<b class="fc"><i>41</i>&nbsp;                currentWaitTime = (new Random().nextFloat()</b>
+<i>42</i>&nbsp;                        * (character_utils.NEUTRAL_MAXIMUM_WAIT_TIME - character_utils.NEUTRAL_MINIMUM_WAIT_TIME))
+<i>43</i>&nbsp;                        + character_utils.NEUTRAL_MINIMUM_WAIT_TIME;
+<b class="nc"><i>44</i>&nbsp;            } else if (elapsedWaitTime &gt;= currentWaitTime) {</b>
+<b class="nc"><i>45</i>&nbsp;                this.findPath(currentRegion.getRandomTile());</b>
+<i>46</i>&nbsp;            }
+<b class="fc"><i>47</i>&nbsp;            elapsedWaitTime += Gdx.graphics.getDeltaTime();</b>
+<i>48</i>&nbsp;        }
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HealthBar</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.ui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HealthBar (io.github.eng12020team24.project1.ui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HealthBar</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.3%
+  </span>
+  <span class="absValue">
+    (3/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.ui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.Gdx;
+<i>4</i>&nbsp;import com.badlogic.gdx.graphics.g2d.*;
+<i>5</i>&nbsp;import io.github.eng12020team24.project1.characters.Auber;
+<i>6</i>&nbsp;import io.github.eng12020team24.project1.mapclasses.TileType;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class HealthBar {
+<i>9</i>&nbsp;    private Animation&lt;TextureRegion&gt; hearts;
+<i>10</i>&nbsp;    private Animation&lt;TextureRegion&gt; healingParticles;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    /**
+<i>13</i>&nbsp;     * Creates and sets the values for this HealthBar
+<i>14</i>&nbsp;     * 
+<i>15</i>&nbsp;     * @param uiAtlas the TextureAtlas containing the sprites for this health bar
+<i>16</i>&nbsp;     */
+<b class="fc"><i>17</i>&nbsp;    public HealthBar(TextureAtlas uiAtlas) {</b>
+<b class="fc"><i>18</i>&nbsp;        hearts = new Animation&lt;TextureRegion&gt;(1f / 2f, uiAtlas.findRegions(&quot;Z_LIFE_HEART&quot;));</b>
+<b class="fc"><i>19</i>&nbsp;        healingParticles = new Animation&lt;TextureRegion&gt;(1f / 5f, uiAtlas.findRegions(&quot;Z_HEALING PARTICLE&quot;));</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * Draws the HealthBar to the screen
+<i>24</i>&nbsp;     * 
+<i>25</i>&nbsp;     * @param batch       the SpriteBatch used to draw the HealthBar
+<i>26</i>&nbsp;     * @param elapsedTime The time in seconds since the start of the game
+<i>27</i>&nbsp;     * @param auber       The Auber used in this game
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    public void render(SpriteBatch batch, float elapsedTime, Auber auber) {
+<b class="nc"><i>30</i>&nbsp;        if (auber.getHealth() &gt; 0) {</b>
+<b class="nc"><i>31</i>&nbsp;            for (int heartcount = 1; heartcount &lt;= auber.getHealth(); heartcount++) {</b>
+<b class="nc"><i>32</i>&nbsp;                batch.draw(hearts.getKeyFrame(elapsedTime, true), heartcount * 16, 0);</b>
+<i>33</i>&nbsp;            }
+<i>34</i>&nbsp;        } else {
+<b class="nc"><i>35</i>&nbsp;            auber.move(25 * TileType.TILE_SIZE - 16, 6 * TileType.TILE_SIZE - 16);</b>
+<i>36</i>&nbsp;        }
+<b class="nc"><i>37</i>&nbsp;        if (auber.isAuberOnHealer()) {</b>
+<b class="nc"><i>38</i>&nbsp;            batch.draw(healingParticles.getKeyFrame(elapsedTime, true), Gdx.graphics.getWidth() / 2 - 32,</b>
+<b class="nc"><i>39</i>&nbsp;                    Gdx.graphics.getHeight() / 2 - 32, 64, 64);</b>
+<b class="nc"><i>40</i>&nbsp;            auber.auberHeal();</b>
+<i>41</i>&nbsp;        }
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AuberGame</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">io.github.eng12020team24.project1.gamestates</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AuberGame (io.github.eng12020team24.project1.gamestates)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuberGame</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    14.3%
+  </span>
+  <span class="absValue">
+    (1/ 7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package io.github.eng12020team24.project1.gamestates;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+<i>4</i>&nbsp;import com.badlogic.gdx.Game;
+<i>5</i>&nbsp;
+<b class="fc"><i>6</i>&nbsp;public class AuberGame extends Game {</b>
+<i>7</i>&nbsp;	SpriteBatch batch;
+<i>8</i>&nbsp;	public MenuState menuState;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;	/**
+<i>11</i>&nbsp;	 * Creates game and drawing batch and then calls {@link MenuState}
+<i>12</i>&nbsp;	 */
+<i>13</i>&nbsp;	@Override
+<i>14</i>&nbsp;	public void create() {
+<b class="nc"><i>15</i>&nbsp;		batch = new SpriteBatch();</b>
+<b class="nc"><i>16</i>&nbsp;		this.menuState = new MenuState(this);</b>
+<b class="nc"><i>17</i>&nbsp;		this.setScreen(this.menuState);</b>
+<i>18</i>&nbsp;	}
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;	@Override
+<i>21</i>&nbsp;	public void render() {
+<b class="nc"><i>22</i>&nbsp;		super.render();</b>
+<b class="nc"><i>23</i>&nbsp;		this.menuState.CheckButtons();</b>
+<i>24</i>&nbsp;	}
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;	@Override
+<i>27</i>&nbsp;	public void dispose() {
+<b class="nc"><i>28</i>&nbsp;		batch.dispose();</b>
+<i>29</i>&nbsp;	}
+<i>30</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-09 12:53</div>
+</div>
+</body>
+</html>
