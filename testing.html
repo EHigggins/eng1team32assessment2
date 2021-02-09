@@ -21,7 +21,7 @@
       ...
 
       <h2>Unit testing</h2>
-      <table>
+      <table class="center" style="width:75%">
         <tr>
           <th>What</th>
           <th>How</th>
@@ -45,18 +45,68 @@
         
         <tr>
           <td>Auber</td>
+          <td>Test whether Auber spawns with the correct amount of initial health.</td>
+          <td>To meet the requirement FR_AUBER <strong>(REQ 1)</strong></td>
+        </tr>
+        <tr>
+          <td>Auber</td>
           <td>Test that Auber returns to full health when performing a full heal.</td>
-          <td>To meet the requirement FR_TELEPORT <strong>(REQ 4)</strong></td>
+          <td>To meet the requirement FR_INFIRMARY <strong>(REQ 3)</strong></td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>Auber</td>
+          <td>Ensure the heal() function is working by testing whether Auber heals for the correct amounts depending on the parameter passed through.</td>
+          <td>To meet the requirement FR_INFIRMARY <strong>(REQ 3)</strong></td>
         </tr>
         <tr>
+          <td>Auber</td>
+          <td>Test whether Auber loses the right amount of health in relation to the amount of damage received as part of the AuberTakesDamage() function.</td>
+          <td>To meet the requirement FR_INFILTRATORS <strong>(REQ 6)</strong></td>
+        </tr>
+        <tr>
+          <td>Difficulty</td>
+          <td>Set the difficulty and test whether Auber heals at the correct corresponding rate of healing.</td>
+          <td>To meet the requirement FR_DIFFICULTY <strong>(REQ 2)</strong></td>
+        </tr>
+        <tr>
+          <td>Difficulty</td>
+          <td>Test the value of the infiltrator’s flee distance in accordance with the selected difficulty.</td>
+          <td>To meet the requirement FR_DIFFICULTY <strong>(REQ 2)</strong></td>
+        </tr>
+        <tr>
+          <td>Difficulty</td>
+          <td>Set the difficulty and test the value of the infiltrator’s ability distance.</td>
+          <td>To meet the requirement FR_DIFFICULTY <strong>(REQ 2)</strong></td>
+        </tr>
+        <tr>
+          <td>Difficulty</td>
+          <td>Test the value of the beam speed for Auber in relation to the selected difficulty.</td>
+          <td>To meet the requirement FR_DIFFICULTY <strong>(REQ 2)</strong></td>
+        </tr>
+        <tr>
+          <td>Game End</td>
+          <td>Set the array of infiltrators in the game to an empty array, then test to see if the game ends in a winning state.</td>
+          <td>To meet the requirement FR_WIN <strong>(REQ 7)</strong></td>
+        </tr>
+        <tr>
+          <td>Game End</td>
+          <td>Set the array of critical systems in the game to an empty array, then test to see if the game ends in a losing state.</td>
+          <td>To meet the requirement FR_LOSE <strong>(REQ 8)</strong></td>
+        </tr>
+        <tr>
+          <td>Power Ups</td>
           <td></td>
+          <td>To meet the requirement FR_POWERUPS <strong>(REQ 5)</strong></td>
+        </tr>
+        <tr>
+          <td>Power Ups</td>
           <td></td>
+          <td>To meet the requirement FR_POWERUPS <strong>(REQ 5)</strong></td>
+        </tr>
+        <tr>
+          <td>Power Ups</td>
           <td></td>
+          <td>To meet the requirement FR_POWERUPS <strong>(REQ 5)</strong></td>
         </tr>
       </table>
 
