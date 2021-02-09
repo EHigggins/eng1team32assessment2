@@ -18,7 +18,12 @@
     </div>
     <div id="page-content">
       <h2>Introduction</h2>
-      ...
+      The majority of testing was conducted using the JUnit testing library, with a mix of automated and manual testing being implemented. A white-box and black-box approach was used to meet both the requirements of the brief and ensure the soundness of the code. We achieved a line coverage of 50% for our testing across the game, with 87% of classes being accounted for in total. We also made sure to include invalid inputs in our testing to increase the effectiveness of our testing approach. Additionally, we were able to implement some boundary testing to reasonably stress our system, such as the testGameEndingPrematurelySystems() test case.
+      <br><br>
+      We suffered from significant delays due to significant refactoring that had to take place. This was primarily due to the repository having very little separation between game rendering and game logic  Because of this we were unable to explore as much decision coverage as we would have liked, as well as create a mocking system that would have aided with testing functions that have no return value.
+      <br><br>
+      We considered our approach to testing appropriate because it focused on satisfying the requirements of the brief, whilst covering a large portion of the code at the same time. Our unit tests allowed us to quickly determine whether new segments of code were suitable, and the unit tests themselves were quick to create once the initial refactoring had been completed. Both validation and verification of our game’s code were strongly achieved throughout our testing, leading to increased confidence when developing.
+
 
       <h2>Unit testing</h2>
       <table class="center" style="width:75%">
